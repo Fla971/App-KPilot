@@ -1,0 +1,12 @@
+INSERT INTO utenti (
+  id, nome, email, ruolo, azienda_id, attivo, created_at
+)
+VALUES (
+  '{{appsmith.store.nuovo_user_id}}',
+  '{{inp_nome.text}}',
+  '{{inp_email.text}}',
+  'ceo',
+  '{{appsmith.store.nuova_azienda_id}}',
+  true,
+  NOW()
+);

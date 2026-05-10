@@ -1,0 +1,14 @@
+INSERT INTO kpi_azienda (azienda_id, kpi_key, attivo)
+SELECT 
+  '{{appsmith.store.nuova_azienda_id}}',
+  k.kpi_key,
+  true
+FROM kpi k
+WHERE k.kpi_code = ANY(
+  ARRAY(
+    SELECT jsonb_array_elements_text(
+      '{{JSON.stringify(appsmith.store.kpi_selezionati)}}'::jsonb
+    )
+  )
+)
+ON CONFLICT (azienda_id, kpi_key) DO NOTHING;

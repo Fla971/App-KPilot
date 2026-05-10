@@ -1,0 +1,2 @@
+DELETE FROM public."ateco"
+  WHERE "description" = {{data_table.triggeredRow.description}};

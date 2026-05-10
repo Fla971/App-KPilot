@@ -1,0 +1,52 @@
+{
+  "animateLoading": true,
+  "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+  "bottomRow": 32,
+  "dynamicBindingPathList": [
+    {
+      "key": "truncateButtonColor"
+    },
+    {
+      "key": "fontFamily"
+    },
+    {
+      "key": "borderRadius"
+    }
+  ],
+  "dynamicHeight": "AUTO_HEIGHT",
+  "dynamicTriggerPathList": [],
+  "fontFamily": "{{appsmith.theme.fontFamily.appFont}}",
+  "fontSize": "1rem",
+  "fontStyle": "",
+  "isLoading": false,
+  "isVisible": true,
+  "key": "q8ya7xdhhj",
+  "leftColumn": 1,
+  "maxDynamicHeight": 9000,
+  "minDynamicHeight": 4,
+  "minWidth": 450,
+  "mobileBottomRow": 23,
+  "mobileLeftColumn": 1,
+  "mobileRightColumn": 17,
+  "mobileTopRow": 19,
+  "needsErrorInfo": false,
+  "originalBottomRow": 32,
+  "originalTopRow": 19,
+  "overflow": "NONE",
+  "parentColumnSpace": 17.625,
+  "parentId": "tznj6jg4h8",
+  "parentRowSpace": 10,
+  "renderMode": "CANVAS",
+  "responsiveBehavior": "fill",
+  "rightColumn": 38,
+  "shouldTruncate": false,
+  "text": "Assemblaggio: costruisci prodotti su commessa unendo componenti, con lavoro prevalentemente manuale.\n\nProduzione: utilizzi macchinari e linee di produzione per realizzare prodotti in serie.\n\nMista: combini entrambi gli approcci.",
+  "textAlign": "LEFT",
+  "textColor": "#5d6d7e",
+  "topRow": 19,
+  "truncateButtonColor": "{{appsmith.theme.colors.primaryColor}}",
+  "type": "TEXT_WIDGET",
+  "version": 1,
+  "widgetId": "fsl5o9d6z9",
+  "widgetName": "Text2"
+}

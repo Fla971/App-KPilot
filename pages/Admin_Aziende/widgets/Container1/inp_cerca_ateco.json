@@ -1,0 +1,64 @@
+{
+  "accentColor": "{{appsmith.theme.colors.primaryColor}}",
+  "animateLoading": true,
+  "autoFocus": false,
+  "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+  "bottomRow": 34,
+  "boxShadow": "none",
+  "defaultText": "",
+  "dynamicBindingPathList": [
+    {
+      "key": "accentColor"
+    },
+    {
+      "key": "borderRadius"
+    }
+  ],
+  "dynamicHeight": "AUTO_HEIGHT",
+  "dynamicTriggerPathList": [
+    {
+      "key": "onTextChanged"
+    }
+  ],
+  "iconAlign": "left",
+  "inputType": "MULTI_LINE_TEXT",
+  "isDisabled": false,
+  "isLoading": false,
+  "isRequired": false,
+  "isVisible": true,
+  "key": "n7n795ap3u",
+  "label": "Cerca settore ATECO",
+  "labelAlignment": "left",
+  "labelPosition": "Top",
+  "labelStyle": "",
+  "labelTextSize": "0.875rem",
+  "labelWidth": 5,
+  "leftColumn": 1,
+  "maxDynamicHeight": 9000,
+  "minDynamicHeight": 4,
+  "minWidth": 450,
+  "mobileBottomRow": 32,
+  "mobileLeftColumn": 0,
+  "mobileRightColumn": 14,
+  "mobileTopRow": 25,
+  "needsErrorInfo": false,
+  "onTextChanged": "{{qry_cerca_ateco.run()}}",
+  "originalBottomRow": 34,
+  "originalTopRow": 24,
+  "parentColumnSpace": 17.625,
+  "parentId": "g84y6igfrp",
+  "parentRowSpace": 10,
+  "placeholderText": "Scrivi descrizione o codice — es. \"meccanica\" o \"25\"",
+  "renderMode": "CANVAS",
+  "resetOnSubmit": true,
+  "responsiveBehavior": "fill",
+  "rightColumn": 38,
+  "shouldAllowAutofill": false,
+  "showStepArrows": false,
+  "tooltip": "",
+  "topRow": 24,
+  "type": "INPUT_WIDGET_V2",
+  "version": 2,
+  "widgetId": "0p9v2o2b7m",
+  "widgetName": "inp_cerca_ateco"
+}

@@ -1,0 +1,11 @@
+SELECT
+  k.kpi_code,
+  k.kpi_name,
+  k.area_costa,
+  ka.target_value
+FROM kpi_azienda ka
+JOIN kpi k ON k.kpi_key = ka.kpi_key
+WHERE ka.azienda_id = '2e544cb8-1836-484e-9ec8-8637e00a5e80'
+  AND ka.attivo = true
+ORDER BY k.kpi_code
+LIMIT 3;

@@ -1,0 +1,52 @@
+{
+  "animateLoading": true,
+  "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+  "bottomRow": 57,
+  "boxShadow": "none",
+  "buttonColor": "#2c3e50",
+  "buttonVariant": "TERTIARY",
+  "disabledWhenInvalid": false,
+  "dynamicBindingPathList": [
+    {
+      "key": "borderRadius"
+    }
+  ],
+  "dynamicPropertyPathList": [
+    {
+      "key": "onClick"
+    }
+  ],
+  "dynamicTriggerPathList": [
+    {
+      "key": "onClick"
+    }
+  ],
+  "isDefaultClickDisabled": true,
+  "isDisabled": false,
+  "isLoading": false,
+  "isVisible": true,
+  "key": "a4rp1mn2m1",
+  "leftColumn": 21,
+  "minWidth": 120,
+  "mobileBottomRow": 57,
+  "mobileLeftColumn": 27,
+  "mobileRightColumn": 43,
+  "mobileTopRow": 53,
+  "needsErrorInfo": false,
+  "onClick": "{{navigateTo('Login', {}, 'SAME_WINDOW')}}",
+  "parentColumnSpace": 9.77734375,
+  "parentId": "zhec85ot8m",
+  "parentRowSpace": 10,
+  "placement": "CENTER",
+  "recaptchaType": "V3",
+  "renderMode": "CANVAS",
+  "resetFormOnClick": false,
+  "responsiveBehavior": "hug",
+  "rightColumn": 45,
+  "text": "Hai già un account? Accedi",
+  "topRow": 53,
+  "type": "BUTTON_WIDGET",
+  "version": 1,
+  "widgetId": "pstegzvjhw",
+  "widgetName": "Button2"
+}

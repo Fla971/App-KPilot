@@ -1,0 +1,19 @@
+INSERT INTO aziende (
+  ragione_sociale, partita_iva, settore_ateco,
+  attività_svolta, dimensione_aziendale,
+  artigianale_vs_industriale, tipo_produzione,
+  stato_abbonamento, created_at, updated_at
+)
+VALUES (
+  {{inp_ragione_sociale.text}},
+  {{inp_partita_iva.text}},
+  {{sel_ateco.selectedOptionValue}},
+  {{inp_attivita.text}},
+  {{sel_dimensione.selectedOptionValue}},
+  {{js_wizard.valoreDBAzienda()}},
+  {{sel_tipo_produzione.selectedOptionValue}},
+  'free',
+  NOW(),
+  NOW()
+)
+RETURNING id;

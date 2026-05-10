@@ -1,0 +1,7 @@
+SELECT code, description
+FROM ateco
+WHERE 
+  description ILIKE {{'%' + inp_cerca_ateco.text + '%'}}
+  OR code ILIKE {{'%' + inp_cerca_ateco.text + '%'}}
+ORDER BY code
+LIMIT 20;

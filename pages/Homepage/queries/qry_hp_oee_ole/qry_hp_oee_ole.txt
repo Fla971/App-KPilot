@@ -1,0 +1,13 @@
+SELECT
+  v.anno,
+  v.mese,
+  v.oee_pct,
+  v.oee_livello,
+  v.ole_pct,
+  v.ole_livello
+FROM v_efficienza_mensile_azienda v
+WHERE v.azienda_id = '2e544cb8-1836-484e-9ec8-8637e00a5e80'
+  AND v.anno = 2026
+  AND v.mese <= 4
+ORDER BY v.anno, v.mese
+LIMIT 6;

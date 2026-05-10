@@ -1,0 +1,65 @@
+{
+  "animateLoading": true,
+  "backgroundColor": "#fef9e7",
+  "borderColor": "#f39c12",
+  "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+  "bottomRow": 32,
+  "dynamicBindingPathList": [
+    {
+      "key": "truncateButtonColor"
+    },
+    {
+      "key": "fontFamily"
+    },
+    {
+      "key": "borderRadius"
+    },
+    {
+      "key": "text"
+    },
+    {
+      "key": "isVisible"
+    }
+  ],
+  "dynamicHeight": "AUTO_HEIGHT",
+  "dynamicPropertyPathList": [
+    {
+      "key": "isVisible"
+    }
+  ],
+  "dynamicTriggerPathList": [],
+  "fontFamily": "{{appsmith.theme.fontFamily.appFont}}",
+  "fontSize": "1rem",
+  "fontStyle": "BOLD",
+  "isLoading": false,
+  "isVisible": "{{js_wizard.isPianoFree()}}",
+  "key": "q8ya7xdhhj",
+  "leftColumn": 1,
+  "maxDynamicHeight": 9000,
+  "minDynamicHeight": 4,
+  "minWidth": 450,
+  "mobileBottomRow": 17,
+  "mobileLeftColumn": 1,
+  "mobileRightColumn": 17,
+  "mobileTopRow": 13,
+  "needsErrorInfo": false,
+  "originalBottomRow": 32,
+  "originalTopRow": 25,
+  "overflow": "NONE",
+  "parentColumnSpace": 17.625,
+  "parentId": "fosjamyk45",
+  "parentRowSpace": 10,
+  "renderMode": "CANVAS",
+  "responsiveBehavior": "fill",
+  "rightColumn": 62,
+  "shouldTruncate": false,
+  "text": "{{\"⚠️ Piano Free: puoi selezionare fino a 1 KPI per area aziendale. I KPI del Metodo COSTA (🔒) sono disponibili nel Piano Pro.\\n\\n Contatta Castelli Consulting per sbloccare il set completo.\"}}",
+  "textAlign": "LEFT",
+  "textColor": "#f39c12",
+  "topRow": 25,
+  "truncateButtonColor": "{{appsmith.theme.colors.primaryColor}}",
+  "type": "TEXT_WIDGET",
+  "version": 1,
+  "widgetId": "kur9jadmgg",
+  "widgetName": "Text3Copy"
+}

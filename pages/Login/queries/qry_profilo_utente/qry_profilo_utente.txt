@@ -1,0 +1,12 @@
+SELECT 
+  u.id,
+  u.nome,
+  u.ruolo,
+  u.azienda_id,
+  u.email,
+  a.ragione_sociale AS azienda_nome
+FROM utenti u
+LEFT JOIN aziende a ON a.id = u.azienda_id
+WHERE u.email = {{inp_email.text}}
+  AND u.attivo = true
+LIMIT 1;

@@ -1,0 +1,58 @@
+SELECT 
+  kpi_code, kpi_name, category, area_costa,
+  kpi_type, total_score_kpi, is_costa_core,
+  unit_of_measure, optimization_direction, description,
+  0 as ordine
+FROM kpi
+WHERE is_active = true
+  AND is_costa_core = true
+  AND (
+    ({{sel_dimensione.selectedOptionValue}} = 'micro'   AND applicable_micro = true) OR
+    ({{sel_dimensione.selectedOptionValue}} = 'small'   AND applicable_small = true) OR
+    ({{sel_dimensione.selectedOptionValue}} = 'medium'  AND applicable_medium = true) OR
+    ({{sel_dimensione.selectedOptionValue}} = 'large'   AND applicable_large = true)
+  )
+  AND (
+    ({{js_wizard.valoreDBAzienda()}} = 'artigianale' AND applicable_artisanal = true) OR
+    ({{js_wizard.valoreDBAzienda()}} = 'mista'       AND applicable_mixed = true) OR
+    ({{js_wizard.valoreDBAzienda()}} = 'industriale' AND applicable_industrial = true)
+  )
+  AND (
+    ({{sel_tipo_produzione.selectedOptionValue}} = 'assemblaggio' AND applicable_assemblaggio = true) OR
+    ({{sel_tipo_produzione.selectedOptionValue}} = 'produzione'   AND applicable_produzione = true) OR
+    ({{sel_tipo_produzione.selectedOptionValue}} = 'mista'        AND applicable_mista = true)
+  )
+
+UNION ALL
+
+SELECT 
+  kpi_code, kpi_name, category, area_costa,
+  kpi_type, total_score_kpi, is_costa_core,
+  unit_of_measure, optimization_direction, description,
+  1 as ordine
+FROM (
+  SELECT *,
+    ROW_NUMBER() OVER (PARTITION BY category ORDER BY total_score_kpi DESC) as rn
+  FROM kpi
+  WHERE is_active = true
+    AND is_costa_core = false
+    AND (
+      ({{sel_dimensione.selectedOptionValue}} = 'micro'   AND applicable_micro = true) OR
+      ({{sel_dimensione.selectedOptionValue}} = 'small'   AND applicable_small = true) OR
+      ({{sel_dimensione.selectedOptionValue}} = 'medium'  AND applicable_medium = true) OR
+      ({{sel_dimensione.selectedOptionValue}} = 'large'   AND applicable_large = true)
+    )
+    AND (
+      ({{js_wizard.valoreDBAzienda()}} = 'artigianale' AND applicable_artisanal = true) OR
+      ({{js_wizard.valoreDBAzienda()}} = 'mista'       AND applicable_mixed = true) OR
+      ({{js_wizard.valoreDBAzienda()}} = 'industriale' AND applicable_industrial = true)
+    )
+    AND (
+      ({{sel_tipo_produzione.selectedOptionValue}} = 'assemblaggio' AND applicable_assemblaggio = true) OR
+      ({{sel_tipo_produzione.selectedOptionValue}} = 'produzione'   AND applicable_produzione = true) OR
+      ({{sel_tipo_produzione.selectedOptionValue}} = 'mista'        AND applicable_mista = true)
+    )
+) sub
+WHERE rn <= 2
+
+ORDER BY ordine, is_costa_core DESC, total_score_kpi DESC;

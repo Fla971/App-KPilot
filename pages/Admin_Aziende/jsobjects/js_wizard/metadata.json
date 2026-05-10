@@ -1,0 +1,44 @@
+{
+  "gitSyncId": "69e488cc5d9029067df64fd2_f710b55e-64be-4615-befb-803fe20008ad",
+  "id": "Admin_Aziende_js_wizard",
+  "unpublishedCollection": {
+    "name": "js_wizard",
+    "pageId": "Admin_Aziende",
+    "pluginId": "js-plugin",
+    "pluginType": "JS",
+    "variables": [
+      {
+        "name": "opzioni_automazione",
+        "value": "[{\n  label: \"Livello 1 — 0-20%: Prevalentemente manuale\",\n  value: 1\n}, {\n  label: \"Livello 2 — 21-40%: Parzialmente automatizzato\",\n  value: 2\n}, {\n  label: \"Livello 3 — 41-60%: Mix equilibrato\",\n  value: 3\n}, {\n  label: \"Livello 4 — 61-80%: Molto automatizzato\",\n  value: 4\n}, {\n  label: \"Livello 5 — 81-100%: Altamente automatizzato\",\n  value: 5\n}]"
+      },
+      {
+        "name": "opzioni_personalizzazione",
+        "value": "[{\n  label: \"Livello 1 — 81-100%: Quasi tutto customizzato\",\n  value: 1\n}, {\n  label: \"Livello 2 — 61-80%: Molto customizzato\",\n  value: 2\n}, {\n  label: \"Livello 3 — 41-60%: Mix equilibrato\",\n  value: 3\n}, {\n  label: \"Livello 4 — 21-40%: Poco customizzato\",\n  value: 4\n}, {\n  label: \"Livello 5 — 0-20%: Standardizzato\",\n  value: 5\n}]"
+      },
+      {
+        "name": "opzioni_volume",
+        "value": "[{\n  label: \"Livello 1 — Pezzi unici\",\n  value: 1\n}, {\n  label: \"Livello 2 — Piccole serie (meno di 50 pz)\",\n  value: 2\n}, {\n  label: \"Livello 3 — Serie medie (50-500 pz)\",\n  value: 3\n}, {\n  label: \"Livello 4 — Grandi serie (500-5000 pz)\",\n  value: 4\n}, {\n  label: \"Livello 5 — Produzione di massa (oltre 5000 pz)\",\n  value: 5\n}]"
+      },
+      {
+        "name": "opzioni_skill",
+        "value": "[{\n  label: \"Livello 1 — 81-100%: Competenza manuale critica\",\n  value: 1\n}, {\n  label: \"Livello 2 — 61-80%: Molto importante\",\n  value: 2\n}, {\n  label: \"Livello 3 — 41-60%: Importante\",\n  value: 3\n}, {\n  label: \"Livello 4 — 21-40%: Poco importante\",\n  value: 4\n}, {\n  label: \"Livello 5 — 0-20%: Minima\",\n  value: 5\n}]"
+      },
+      {
+        "name": "opzioni_standardizzazione",
+        "value": "[{\n  label: \"Livello 1 — 0-20%: Quasi nulla\",\n  value: 1\n}, {\n  label: \"Livello 2 — 21-40%: Bassa\",\n  value: 2\n}, {\n  label: \"Livello 3 — 41-60%: Media\",\n  value: 3\n}, {\n  label: \"Livello 4 — 61-80%: Alta\",\n  value: 4\n}, {\n  label: \"Livello 5 — 81-100%: Molto alta\",\n  value: 5\n}]"
+      },
+      {
+        "name": "opzioni_flessibilita",
+        "value": "[{\n  label: \"Livello 1 — Altissima flessibilità\",\n  value: 1\n}, {\n  label: \"Livello 2 — Alta flessibilità\",\n  value: 2\n}, {\n  label: \"Livello 3 — Media flessibilità\",\n  value: 3\n}, {\n  label: \"Livello 4 — Bassa flessibilità\",\n  value: 4\n}, {\n  label: \"Livello 5 — Minima flessibilità\",\n  value: 5\n}]"
+      },
+      {
+        "name": "opzioni_tipo_produzione",
+        "value": "[{\n  label: \"Assemblaggio — produzione su commessa, manuale o semi-automatica\",\n  value: \"assemblaggio\"\n}, {\n  label: \"Produzione — linee di produzione con macchinari\",\n  value: \"produzione\"\n}, {\n  label: \"Mista — sia assemblaggio che produzione con macchine\",\n  value: \"mista\"\n}]"
+      },
+      {
+        "name": "opzioni_dimensione",
+        "value": "[{\n  label: \"Micro impresa — fino a 9 dipendenti\",\n  value: \"micro\"\n}, {\n  label: \"Piccola impresa — 10-49 dipendenti\",\n  value: \"small\"\n}, {\n  label: \"Media impresa — 50-249 dipendenti\",\n  value: \"medium\"\n}, {\n  label: \"Grande impresa — 250+ dipendenti\",\n  value: \"large\"\n}]"
+      }
+    ]
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "animateLoading": true,
+  "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+  "bottomRow": 163,
+  "dynamicBindingPathList": [
+    {
+      "key": "truncateButtonColor"
+    },
+    {
+      "key": "fontFamily"
+    },
+    {
+      "key": "borderRadius"
+    },
+    {
+      "key": "isVisible"
+    }
+  ],
+  "dynamicHeight": "AUTO_HEIGHT",
+  "dynamicPropertyPathList": [
+    {
+      "key": "isVisible"
+    }
+  ],
+  "dynamicTriggerPathList": [],
+  "fontFamily": "{{appsmith.theme.fontFamily.appFont}}",
+  "fontSize": "1.25rem",
+  "fontStyle": "BOLD",
+  "isLoading": false,
+  "isVisible": "{{js_auth.hasAccess(['resp_produzione', 'resp_qualita', 'resp_acquisti', 'cfo', 'hr', 'manager_rd', 'manager_vendite', 'manager_it'])}}",
+  "key": "l6r6kii0vs",
+  "leftColumn": 1,
+  "maxDynamicHeight": 9000,
+  "minDynamicHeight": 4,
+  "minWidth": 450,
+  "mobileBottomRow": 135,
+  "mobileLeftColumn": 24,
+  "mobileRightColumn": 40,
+  "mobileTopRow": 131,
+  "needsErrorInfo": false,
+  "originalBottomRow": 163,
+  "originalTopRow": 159,
+  "overflow": "NONE",
+  "parentColumnSpace": 14.26171875,
+  "parentId": "e78pl3cpv7",
+  "parentRowSpace": 10,
+  "renderMode": "CANVAS",
+  "responsiveBehavior": "fill",
+  "rightColumn": 64,
+  "shouldTruncate": false,
+  "text": "I tuoi KPI — mese corrente",
+  "textAlign": "CENTER",
+  "textColor": "#231F20",
+  "topRow": 159,
+  "truncateButtonColor": "{{appsmith.theme.colors.primaryColor}}",
+  "type": "TEXT_WIDGET",
+  "version": 1,
+  "widgetId": "eiorzqu8df",
+  "widgetName": "lbl_manager_titolo"
+}

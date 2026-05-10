@@ -1,0 +1,22 @@
+SELECT
+  k.kpi_code,
+  k.kpi_name,
+  k.area_costa,
+  ka.target_value
+FROM kpi_azienda ka
+JOIN kpi k ON k.kpi_key = ka.kpi_key
+WHERE ka.azienda_id = '{{js_auth.getAziendaId()}}'
+  AND ka.attivo = true
+  AND k.area_costa = CASE '{{appsmith.store.currentUser?.ruolo}}'
+    WHEN 'resp_produzione' THEN 'O'
+    WHEN 'resp_qualita'    THEN 'O'
+    WHEN 'resp_acquisti'   THEN 'A'
+    WHEN 'cfo'             THEN 'C'
+    WHEN 'hr'              THEN 'A'
+    WHEN 'manager_rd'      THEN 'T'
+    WHEN 'manager_vendite' THEN 'S'
+    WHEN 'manager_it'      THEN 'T'
+    ELSE 'O'
+  END
+ORDER BY k.kpi_code
+LIMIT 3;

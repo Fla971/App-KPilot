@@ -1,0 +1,10 @@
+INSERT INTO aziende (
+  ragione_sociale, stato_abbonamento, created_at, updated_at
+)
+VALUES (
+  {{inp_azienda.text}},
+  'free',
+  NOW(),
+  NOW()
+)
+RETURNING id;

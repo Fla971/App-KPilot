@@ -1,0 +1,60 @@
+{
+  "animateLoading": true,
+  "borderRadius": "{{appsmith.theme.borderRadius.appBorderRadius}}",
+  "bottomRow": 214,
+  "boxShadow": "none",
+  "buttonColor": "#c0392b",
+  "buttonVariant": "PRIMARY",
+  "disabledWhenInvalid": false,
+  "dynamicBindingPathList": [
+    {
+      "key": "borderRadius"
+    },
+    {
+      "key": "isVisible"
+    }
+  ],
+  "dynamicPropertyPathList": [
+    {
+      "key": "isVisible"
+    },
+    {
+      "key": "onClick"
+    }
+  ],
+  "dynamicTriggerPathList": [
+    {
+      "key": "onClick"
+    }
+  ],
+  "isDefaultClickDisabled": true,
+  "isDisabled": false,
+  "isLoading": false,
+  "isVisible": "{{js_auth.hasAccess(['resp_produzione', 'resp_qualita', 'resp_acquisti', 'cfo', 'hr', 'manager_rd', 'manager_vendite', 'manager_it'])}}",
+  "key": "adxiolx8cb",
+  "leftColumn": 24,
+  "minWidth": 120,
+  "mobileBottomRow": 190,
+  "mobileLeftColumn": 24,
+  "mobileRightColumn": 40,
+  "mobileTopRow": 186,
+  "needsErrorInfo": false,
+  "onClick": "{{navigateTo('Dashboard_CEO', {}, 'SAME_WINDOW')}}",
+  "originalBottomRow": 214,
+  "originalTopRow": 210,
+  "parentColumnSpace": 14.26171875,
+  "parentId": "e78pl3cpv7",
+  "parentRowSpace": 10,
+  "placement": "CENTER",
+  "recaptchaType": "V3",
+  "renderMode": "CANVAS",
+  "resetFormOnClick": false,
+  "responsiveBehavior": "hug",
+  "rightColumn": 40,
+  "text": "Vai alla mia Dashboard",
+  "topRow": 210,
+  "type": "BUTTON_WIDGET",
+  "version": 1,
+  "widgetId": "25le9m4td9",
+  "widgetName": "btn_dashboard_manager"
+}

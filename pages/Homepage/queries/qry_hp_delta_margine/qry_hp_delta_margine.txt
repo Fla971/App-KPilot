@@ -1,0 +1,8 @@
+SELECT
+  period_date,
+  value
+FROM kpi_valori_mensili
+WHERE azienda_id = '2e544cb8-1836-484e-9ec8-8637e00a5e80'
+  AND kpi_key = 75
+ORDER BY period_date DESC
+LIMIT 2;

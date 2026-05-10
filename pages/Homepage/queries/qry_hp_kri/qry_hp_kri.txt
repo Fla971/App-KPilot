@@ -1,0 +1,18 @@
+SELECT
+  kri_code,
+  kri_name,
+  direzione_allarme,
+  valore,
+  soglia_attiva,
+  stato,
+  rischio_collegato,
+  area_costa
+FROM v_kri_stato
+WHERE azienda_id = '2e544cb8-1836-484e-9ec8-8637e00a5e80'
+ORDER BY
+  CASE stato
+    WHEN 'allarme'    THEN 1
+    WHEN 'attenzione' THEN 2
+    WHEN 'ok'         THEN 3
+  END,
+  kri_name;

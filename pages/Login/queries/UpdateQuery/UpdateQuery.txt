@@ -1,0 +1,10 @@
+UPDATE public."ateco" SET
+		"code" = '{{update_form.fieldState.code.isVisible ? update_form.formData.code : update_form.sourceData.code}}',
+		"created_at" = '{{update_form.fieldState.created_at.isVisible ? update_form.formData.created_at : update_form.sourceData.created_at}}',
+    "updated_at" = '{{update_form.fieldState.updated_at.isVisible ? update_form.formData.updated_at : update_form.sourceData.updated_at}}',
+		"ateco_hierarchy" = '{{update_form.fieldState.ateco_hierarchy.isVisible ? update_form.formData.ateco_hierarchy : update_form.sourceData.ateco_hierarchy}}',
+		"cluster_id" = '{{update_form.fieldState.cluster_id.isVisible ? update_form.formData.cluster_id : update_form.sourceData.cluster_id}}',
+		"description_en" = '{{update_form.fieldState.description_en.isVisible ? update_form.formData.description_en : update_form.sourceData.description_en}}',
+		"tier" = '{{update_form.fieldState.tier.isVisible ? update_form.formData.tier : update_form.sourceData.tier}}',
+		"macrosector" = '{{update_form.fieldState.macrosector.isVisible ? update_form.formData.macrosector : update_form.sourceData.macrosector}}'
+WHERE "description" = {{data_table.selectedRow.description}};
