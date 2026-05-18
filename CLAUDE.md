@@ -1,15 +1,25 @@
-# CLAUDE.md — Contesto progetto KPilot™
-> Questo file viene letto automaticamente da Claude Code all'avvio.  
-> Contiene tutto il contesto necessario per lavorare sulla repo senza ripetere spiegazioni ogni volta.  
-> Lingua di lavoro: **italiano**.
+# CLAUDE.md — KPilot™
+## Castelli Consulting | Aggiornato: maggio 2026
+
+> Questo file viene letto automaticamente da Claude Code ad ogni sessione.
+> Contiene tutto il contesto necessario per lavorare su questo progetto
+> senza ripetere errori già incontrati.
+> Leggi TUTTO prima di iniziare qualsiasi modifica.
 
 ---
 
-## 1. Chi sono e cosa stiamo costruendo
+## 1. Cos'è questo progetto
 
-Sono **Flavio Castelli**, Ingegnere Gestionale, titolare di **Castelli Consulting** — studio di consulenza per PMI manifatturiere italiane (fatturato 5–50M€, ATECO C, area Lombardia).
+**KPilot™** (ex Scudo Operativo™) è la piattaforma gestionale di
+Castelli Consulting per il monitoraggio di KPI, KRI e performance
+operativa delle PMI manifatturiere clienti.
 
-**KPilot™** è l'applicazione gestionale che supporta i clienti in Fase 2 del mio servizio di consulenza (Implementazione e Monitoraggio, 12 mesi). Permette di monitorare KPI, KRI e performance operativa in tempo reale.
+Supporta la Fase 2 del servizio consulenziale (Implementazione e
+Monitoraggio, 12 mesi) del Piano PERFORMANCE.
+
+**URL produzione:** https://app.kpilot.tech
+**Repository GitHub:** github.com/Fla971/App-KPilot
+**Frontend:** Appsmith Cloud (sviluppo) → VPS self-hosted (produzione, futuro)
 
 ---
 
@@ -17,170 +27,252 @@ Sono **Flavio Castelli**, Ingegnere Gestionale, titolare di **Castelli Consultin
 
 | Componente | Dettaglio |
 |---|---|
-| Database | Supabase (PostgreSQL) — `lnhfgsuiaahtarmzvyry.supabase.co` |
-| Frontend | Appsmith Cloud — workspace `fcastelli's apps`, progetto `Scudo Operativo` |
+| Database | Supabase (PostgreSQL) — lnhfgsuiaahtarmzvyry.supabase.co |
+| Frontend | Appsmith — progetto "Scudo Operativo" (workspace fcastelli's apps) |
 | Auth | Supabase Auth (email + password), token JWT |
-| Automazioni | Make.com (alert KRI, notifiche via Brevo) |
-| Calcolo KPI | JavaScript lato Appsmith (scelta architetturale deliberata — NON trigger SQL) |
-| Repo | GitHub — sincronizzata via Git Sync di Appsmith |
-
-> **Nota sulla repo:** Appsmith esporta l'app in formato JSON strutturato (una cartella per pagina, una per datasource, ecc.). I file `.json` nelle cartelle `pages/` contengono widget, query e JSObject di ogni pagina.
+| Automazioni | Make.com (alert KRI) + Brevo (notifiche email) |
+| Calcolo KPI | JavaScript lato Appsmith — MAI in trigger SQL |
+| Git Sync | Attivato maggio 2026 — sincronizzato con GitHub |
 
 ---
 
-## 3. Principi architetturali — NON modificare senza conferma
+## 3. Principi architetturali — NON cambiare mai
 
-- Il **calcolo dei KPI avviene in JavaScript Appsmith**, mai in trigger SQL. Questa è una decisione consapevole: trasparenza, debug facile, flessibilità per archetipi cliente.
-- `js_auth` è un JSObject **locale a ogni pagina** — va replicato su ogni nuova pagina, non è globale.
-- RLS (Row Level Security) attiva su tutte le tabelle dati in Supabase.
-- Il ruolo `consulente` bypassa la logica `azienda_id` e vede tutti i dati.
-- `azienda_id` è nullable **solo** per il ruolo `consulente`.
-- `kpi_valori_mensili` viene popolato da Appsmith via UPSERT, non da trigger.
-- OEE/OLE sono calcolati da GENERATED columns nel DB, aggregati da viste SQL.
-- L'app è **solo desktop** — nessun responsive da implementare.
-
----
-
-## 4. Ruoli utenti — USARE SEMPRE QUESTI NOMI
-
-```
-ceo | consulente | resp_qualita | resp_produzione | resp_acquisti |
-cfo | hr | capo_reparto | manager_rd | manager_vendite | manager_it
-```
-
-> ⚠️ Il documento UX/UI usa nomi vecchi (`manager_produzione`, `manager_qualita`, ecc.) che **non esistono nel DB**. Ignorarli sempre. Usare solo i nomi del CHECK constraint sopra.
+- **Calcolo KPI in JavaScript Appsmith** — mai in trigger SQL
+  (decisione deliberata per trasparenza e debug)
+- **RLS attiva su tutte le tabelle** — non disabilitare mai
+- **Il consulente bypassa la logica azienda** e vede tutto
+- **azienda_id nullable SOLO per ruolo consulente**
+- **OEE/OLE: GENERATED columns SQL** — non calcolare in JS
+- **kpi_valori_mensili: popolato via UPSERT da Appsmith**
+- **KPI attivati per azienda: tabella kpi_azienda**
 
 ---
 
-## 5. Aziende e utenti di test
+## 4. Ruoli utente — Nomi ESATTI nel database
 
-| Azienda | UUID |
+Usare SEMPRE questi nomi — i nomi nella documentazione UX/UI vecchia
+sono SBAGLIATI:
+
+| Ruolo corretto (DB) | NON usare |
 |---|---|
-| Meccanica Brianza Srl | `2e544cb8-1836-484e-9ec8-8637e00a5e80` |
-| Assemblaggi Lariani SpA | `ab2852f5-4b1b-480c-ab6f-a90ea0b8fb83` |
-| Food Lombardo SpA | `44e65c5c-2792-48fb-91df-52b168d49c0e` |
+| `consulente` | — |
+| `ceo` | — |
+| `cfo` | — |
+| `resp_produzione` | "responsabile_produzione", "prod" |
+| `resp_qualita` | "responsabile_qualita", "qualita" |
+| `resp_acquisti` | "responsabile_acquisti", "acquisti" |
+| `hr` | "risorse_umane" |
+| `capo_reparto` | "capo_reparto_produzione" |
+| `manager_rd` | "manager_ricerca" |
+| `manager_vendite` | "manager_commerciale" |
+| `manager_it` | "manager_informatica" |
 
-| Email | Ruolo | Azienda |
+---
+
+## 5. Errori critici già incontrati — NON ripetere
+
+| Problema | Soluzione |
+|---|---|
+| `selectedRows` non affidabile | Usare SEMPRE `selectedRowIndices` |
+| `onRowSelected` non affidabile | Non usare — gestire selezione diversamente |
+| Paginazione tabella wizard | DISATTIVATA — obbligatorio lasciarla disattivata |
+| `kri_valori.in_allarme` | È GENERATED column — non inserirla negli INSERT |
+| `JSObject1` sulla pagina Login | Causava errore "Start object with export default" — eliminato |
+| Campo `category` nella tabella kpi | Si chiama `category` NON `categoria` |
+| `manager_vendite` → area | 'Vendite/Commerciale' (non 'Vendite') — valore esatto nel DB |
+| `v_kri_stato` restituisce stato | In MAIUSCOLO: 'OK', 'ATTENZIONE', 'ALLARME' |
+| `oee_livello/ole_livello` | Valori: 'excellent', 'good', 'poor', 'critical' (inglese) |
+| Google Docs Markdown tables | Non supportate — usare testo block |
+| JSON truncation Make.com | max_tokens deve essere 8192 |
+
+---
+
+## 6. Stato sviluppo attuale (maggio 2026)
+
+### Completato ✅
+- Schema database completo e operativo
+- Pagina Login
+- Pagina Registrazione (con flusso Auth → aziende → utenti)
+- Homepage (vista CEO e vista Manager)
+- Wizard onboarding self-service
+- Strategia Bottom-Up (Manager si iscrive → invita CEO)
+- Git Sync con GitHub attivato
+- KPI catalogati: 135 con required_variables JSONB
+- KRI catalogati: 20 base
+
+### In sviluppo ⏳ (Minimum Viable KPilot)
+- Dashboard CEO completa
+- KRI e Allarmi
+- Inserimento dati mensili
+- Audit PVI (Protocollo Verifica Implementazione)
+- Selettore azienda per consulente
+
+### Rinviato ❌ (dopo i primi 2 clienti attivi)
+- Piano PRO completo
+- Piano FREE
+- App mobile
+- Self-hosting VPS
+- Report trimestrale automatizzato (Consulente Digitale AI)
+
+---
+
+## 7. Tre piani commerciali
+
+| Piano | Prezzo | Funzioni chiave |
 |---|---|---|
-| `fcastelli@castelliconsulting.it` | consulente | — |
-| `ceo@test.it` | ceo | Meccanica Brianza Srl |
-| `resp_prod@test.it` | resp_produzione | Meccanica Brianza Srl |
+| FREE | Gratuito | 2 KPI per area, dashboard base, funzioni avanzate 🔒 |
+| PRO | ~200€/mese | Tutto FREE + KPI personalizzati + alert KRI + multi-utente |
+| PERFORMANCE | 3.500€ setup + 1.500€/mese | Tutto PRO + Check-Up + consulenza + audit PVI + Success Fee |
+
+**Success Fee:** 15% del Margine Annuo Recuperato, cap 80.000€/anno
+**Clausola salvaguardia:** I_imp ≥85% e obiettivi non raggiunti → Success Fee non dovuta
 
 ---
 
-## 6. Stato di sviluppo (v1.7 — Maggio 2026)
+## 8. Database — Tabelle principali
 
-| Pagina | Stato |
-|---|---|
-| Login | ✅ Fatto |
-| Layout master + Guard | ✅ Fatto |
-| Wizard onboarding KPI | ✅ Fatto — ⚠️ da aggiornare: filtro KPI per ruolo via `ruolo_aree_kpi` |
-| Pagina Registrazione | ✅ Base fatto — ⚠️ da aggiornare: gestione param `azienda_id` da URL |
-| Homepage — vista CEO + vista Manager | ✅ Fatto |
-| **Dashboard CEO** | ⏳ Prossimo |
-| Selettore azienda (consulente) | ⏳ Da fare |
-| Consuntivo giornaliero | ⏳ Da fare |
-| Monitor OEE/OLE | ⏳ Da fare |
-| Dati mensili Step 1 + Step 2 | ⏳ Da fare |
-| KRI & Allarmi | ⏳ Da fare |
-| Roadmap Azioni | ⏳ Da fare |
-| Audit PVI | ⏳ Da fare |
-| Admin — gestione utenti, aziende, richieste accesso | ⏳ Da fare |
-| Lead Magnet — Wizard KPI standalone | ⏳ Da fare (dopo app) |
+```
+Catalogo (statiche):
+  kpi                    ← 135 KPI con required_variables JSONB
+  kri                    ← 20 KRI base
+  aree_kpi               ← 8 aree COSTA
+  ruolo_aree_kpi         ← mappatura ruolo → aree visibili
 
----
+Per azienda (configurazione):
+  aziende                ← anagrafica multi-tenant
+  utenti                 ← con ruolo e azienda_id
+  kpi_azienda            ← KPI attivati per azienda
+  kri_azienda            ← KRI configurati per azienda
 
-## 7. Note operative critiche (errori già incontrati)
+Input mensile:
+  kpi_valori_mensili     ← valori inseriti dai manager
+  kri_valori             ← valori KRI (in_allarme è GENERATED)
 
-- `selectedRows` NON affidabile in Appsmith — usare sempre `selectedRowIndices`
-- `onRowSelected` NON affidabile in Appsmith Cloud
-- Paginazione tabella nel wizard: **DISATTIVATA** — obbligatorio mantenerla off
-- `js_homepage` NON può essere chiamato dentro query SQL — usare CASE SQL direttamente
-- `kri_valori.in_allarme` è una GENERATED column — **non inserirla negli INSERT**
-- `oee_livello`/`ole_livello` restituiscono valori in inglese: `excellent`, `good`, `poor`, `critical`
-- `v_kri_stato` restituisce stato in MAIUSCOLO: `OK`, `ATTENZIONE`, `ALLARME`
-- In Appsmith i widget hanno posizione fissa — usare **visibilità widget interni**, non container sovrapposti
-- `tipo_linee` è stato eliminato — usare sempre `tipo_produzione`
-- `dimensioni_aziendali` usa codici inglesi: `micro` / `small` / `medium` / `large`
-- `partita_iva` è nullable nella tabella `aziende`
-- Per eliminare un utente di test: prima `DELETE FROM utenti`, poi `DELETE FROM aziende`
-- `qry_crea_utente_auth` usa **Service Role Key** nell'header — NON la anon key
-- Piano Free: ruolo ≠ consulente → Free. Ruolo consulente → sempre Pro
-- KPI COSTA core: `is_costa_core = true`
-
----
-
-## 7b. Architettura permessi per area KPI (v1.7)
-
-Esiste la tabella `ruolo_aree_kpi` che mappa ogni ruolo alle aree KPI visibili. **Usarla sempre** per filtrare KPI nel wizard e nelle query, invece di hardcodare la categoria nel codice JS.
-
-| Ruolo | Aree visibili |
-|---|---|
-| ceo, consulente | Tutte |
-| resp_produzione | Produzione, Logistica |
-| resp_qualita | Qualità |
-| resp_acquisti | Logistica |
-| cfo | Finanza |
-| hr | Risorse Umane |
-| manager_rd | Ricerca & Sviluppo |
-| manager_vendite | Vendite |
-| manager_it | IT |
-| capo_reparto | Nessun KPI — redirect diretto al Consuntivo Giornaliero |
-
-**Query tipo per filtrare KPI per ruolo nel wizard:**
-```sql
-SELECT k.*
-FROM kpi k
-JOIN ruolo_aree_kpi r ON k.categoria = r.area_kpi
-WHERE r.ruolo = {{appsmith.store.currentUser.ruolo}}
-  AND k.is_active = true
-ORDER BY k.is_costa_core DESC, k.kpi_key;
+Governance:
+  kpi_insight            ← foundation per AI review automation
+  kpi_tips               ← foundation per AI review automation
 ```
 
-**Strategia Bottom-Up (v1.7):** i Manager possono iscriversi autonomamente senza aspettare il CEO.
-- Scenario A: azienda non esiste → Manager la crea, con permessi limitati alla sua area
-- Scenario B: azienda già esiste → Manager invia richiesta in `richieste_accesso` (stato `pending`), CEO approva dall'Admin
-- Il Manager fondatore NON ottiene ruolo CEO — incentivo a invitare il CEO tramite link pre-configurato via Make/Brevo
+**Tabelle legacy da rimuovere** (dopo verifica conteggio):
+- `rilevazioni_mensili`
+- `soglie_allarme`
 
 ---
 
-## 8. Viste SQL principali disponibili
+## 9. Viste SQL disponibili
 
-- `v_dashboard_kpi` — vista principale con valori KPI + metadati + insight
-- `v_kpi_produzione`, `v_kpi_qualita`, `v_kpi_finanza`, `v_kpi_logistica`, `v_kpi_hr`, `v_kpi_rd`, `v_kpi_vendite`, `v_kpi_it` — una per area COSTA
-- `v_kpi_form_input` — genera dinamicamente i form di input per ogni KPI
-- `v_kpi_per_azienda` — KPI applicabili a una specifica azienda
-- `v_kri_stato` — stato allarmi KRI per azienda
-- `v_oee_mensile`, `v_ole_mensile`, `v_oee_giornaliero`, `v_ole_giornaliero` — OEE/OLE
-- `v_pareto_fermi` — analisi Pareto delle causali di fermo
-- `v_avanzamento_commesse` — avanzamento commesse aperte
+```sql
+v_kpi_form_input        ← input form dinamico per manager
+v_kpi_<categoria>       ← 8 viste per area COSTA
+v_kri_stato             ← stato KRI (OK/ATTENZIONE/ALLARME maiuscolo)
+```
 
 ---
 
-## 9. Problemi aperti noti
+## 10. Appsmith — Pattern fondamentali
 
-- `kri_valori.in_allarme` gestisce solo la direzione "sopra soglia" — non gestisce KRI dove l'allarme scatta sotto soglia. Fix da fare.
-- `qry_hp_oee_ole`: anno/mese attualmente hardcodati — da aggiornare con selettore mese dinamico.
-- 7 KPI (key 200–206) senza `required_variables` nel catalogo — da completare con UPDATE.
-- **[v1.7]** Tabella `ruolo_aree_kpi` da creare e popolare in Supabase (SQL nel Diario v1.7, sezione 3.3).
-- **[v1.7]** Tabella `richieste_accesso` da creare in Supabase (SQL nel Diario v1.7, sezione 2.5).
-- **[v1.7]** Verificare se RLS su `kpi_valori_mensili` filtra correttamente per area quando accede un Manager.
-- **[v1.7]** Pagina Registrazione: aggiungere gestione parametro `azienda_id` da URL (logica in Diario v1.7, sezione 6).
+```javascript
+// Selezione riga tabella — SEMPRE così
+const idx = Table1.selectedRowIndices[0];
+const row = Table1.tableData[idx];
 
----
+// UPSERT kpi_valori_mensili
+INSERT INTO kpi_valori_mensili (azienda_id, kpi_id, anno, mese, valore)
+VALUES (...)
+ON CONFLICT (azienda_id, kpi_id, anno, mese)
+DO UPDATE SET valore = EXCLUDED.valore;
 
-## 10. Come lavorare su questa repo
+// Visibilità widget CEO vs Manager
+// Usare proprietà isVisible dei widget interni
+// NON sovrapporre container — posizione fissa in Appsmith
 
-Quando modifico file JSON di Appsmith:
-1. Leggere il file della pagina interessata in `pages/`
-2. Proporre la modifica puntuale (non riscrivere l'intero JSON se non necessario)
-3. Dopo il commit, in Appsmith: **Deploy → Pull from repository**
-
-Per query SQL nuove: seguire il pattern UPSERT già in uso su `kpi_valori_mensili`.
-
-Per nuove pagine: replicare sempre `js_auth` dalla pagina Login come primo passo.
+// URL invito CEO — usare variabile di ambiente
+// per switching Cloud → VPS automatico
+```
 
 ---
 
-*Castelli Consulting | KPilot™ | Documento riservato*  
-*Aggiornato: Maggio 2026 — v1.7*
+## 11. Make.com — Flussi AI attivi
+
+| Modulo | Funzione |
+|---|---|
+| AI-03 | Analisi questionario CEO → output strutturato |
+| AI-08 | KPI per dimensione con mappa_margine |
+| AI-10 | Report finale |
+
+**Variabili corrette:** `costa_*` e `valori_*` (non invertire)
+**Campo aggiunto:** `riepilogo_kpi` in AI-03 output e Google Docs mapper
+
+---
+
+## 12. Nomi prodotto — Usare sempre KPilot™
+
+Il vecchio nome "Scudo Operativo™" è deprecato.
+In Appsmith il progetto si chiama ancora "Scudo Operativo" — non rinominare
+il progetto Appsmith (romperebbe il Git Sync), ma nei contenuti usare KPilot™.
+
+---
+
+## 13. Ecosistema prodotti
+
+```
+KPilot™ (questo progetto) — DESTINAZIONE del funnel
+  ├── Piano FREE → acquisizione lead
+  ├── Piano PRO → monetizzazione autonoma
+  └── Piano PERFORMANCE → consulenza completa
+      ├── include BalanceScan™ annuale (gratis)
+      └── include RadarFinanziario™ trimestrale (gratis)
+
+BalanceScan™ → porta d'ingresso del funnel
+  URL: balancescan.kpilot.tech
+
+RadarFinanziario™ → continuità del funnel
+  URL: radar.kpilot.tech
+
+Token System → controllo accessi per tutti e tre
+  URL: tokens.kpilot.tech (in sviluppo)
+```
+
+---
+
+## 14. Metriche obiettivo 2026
+
+| Metrica | Obiettivo | Scadenza |
+|---|---|---|
+| Contratti Piano PERFORMANCE attivi | 2-3 | Dicembre 2026 |
+| Check-Up Margine e Rischi completati | 5 | Dicembre 2026 |
+| CEO contattati su LinkedIn | 50 | Giugno 2026 |
+| Commercialisti partner | 3 | Dicembre 2026 |
+| KPilot Minimum Viable completato | ✅ | Prima del primo cliente Fase 2 |
+
+---
+
+## 15. Prossimi task KPilot (in ordine di priorità)
+
+- [ ] Dashboard CEO — completare
+- [ ] KRI e Allarmi — completare
+- [ ] Inserimento dati mensili — costruire
+- [ ] Audit PVI — costruire
+- [ ] Selettore azienda per consulente
+- [ ] Rimuovere tabelle legacy dopo verifica (rilevazioni_mensili, soglie_allarme)
+- [ ] Fix kri_valori.in_allarme per direzione below-threshold
+
+---
+
+## 16. Documenti di riferimento nel progetto
+
+| File | Contenuto |
+|---|---|
+| `KPilot_Diario_Progetto_Appsmith_v1_8.md` | Diario tecnico completo — leggere per contesto storico |
+| `KPilot_Strategia_Commerciale_e_Piani_v3.md` | Strategia commerciale, piani, LinkedIn, BalanceScan |
+| `KPilot_Linee_Guida_UX_UI_v2-0.md` | Design system e UX |
+| `Scudo_Operativo_Architettura_DB_2026.md` | Schema database completo |
+| `Database_CC.sql` | SQL completo del database |
+| `kpi_rows.sql` | 135 KPI con variabili |
+| `kri_rows.sql` | 20 KRI base |
+
+---
+
+*Aggiorna questo file dopo ogni sessione se scopri nuovi errori o decisioni.*
+*Versione documento: 1.0 — maggio 2026*
